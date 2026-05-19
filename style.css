@@ -157,6 +157,27 @@ select:focus, input:focus { outline: none; border-color: var(--brand); }
 }
 .reco__hint { font-size: 13px; color: var(--ok-text); }
 
+/* 推荐方案 */
+.plan {
+  margin-top: 14px;
+  background: #fff;
+  border: 1.5px solid var(--ok-text);
+  border-radius: 12px;
+  padding: 16px;
+}
+.plan__total { font-size: 15px; color: var(--text); }
+.plan__total b { font-size: 26px; color: var(--ok-text); margin-left: 4px; }
+.plan__split { font-size: 13px; color: var(--muted); margin-top: 4px; }
+.plan__boxes {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--border);
+  line-height: 1.6;
+}
+
 /* 两家对比 */
 .compare {
   margin-top: 16px;
@@ -187,8 +208,9 @@ select:focus, input:focus { outline: none; border-color: var(--brand); }
   border-radius: 6px;
   font-weight: 700;
 }
-.cmp__price { font-size: 24px; font-weight: 800; color: var(--text); }
+.cmp__price { display: block; font-size: 24px; font-weight: 800; color: var(--text); }
 .cmp--best .cmp__price { color: var(--ok-text); }
+.cmp__sub { display: block; font-size: 11px; color: var(--muted); margin-top: 4px; }
 .cmp__na { font-size: 15px; color: var(--muted); }
 
 .result__breakdown {
@@ -203,8 +225,15 @@ select:focus, input:focus { outline: none; border-color: var(--brand); }
 .result__breakdown li {
   display: flex;
   justify-content: space-between;
+  gap: 12px;
   font-size: 13px;
   color: var(--ok-text);
+}
+.result__breakdown li span:last-child { text-align: right; }
+.result__breakdown li.bd-sep {
+  border-top: 1px dashed rgba(4, 120, 87, .35);
+  margin: 4px 0;
+  padding: 0;
 }
 .note {
   margin-top: 10px;

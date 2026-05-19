@@ -25,6 +25,16 @@ window.PRICE_TABLE = {
     jd: { key: "jd", name: "京东" },
   },
 
+  // 箱型表（cap=最多装几盒，cost=单个箱子成本/元）。按容量从大到小。
+  boxes: [
+    { name: "零号箱", cap: 36, cost: 5 },
+    { name: "1号箱", cap: 24, cost: 4.5 },
+    { name: "2号箱", cap: 15, cost: 3.5 },
+    { name: "3号箱", cap: 9, cost: 2.5 },
+    { name: "4号箱", cap: 6, cost: 2 },
+    { name: "5号箱", cap: 3, cost: 1.5 },
+  ],
+
   // 目的地价格表（始发地：江苏省）
   destinations: [
     { dest: "上海",               jt: { qi: 6,    xu: 0.9, max: 30 },  jd: { qi: 7.2,  xu: 1,   max: 30 } },

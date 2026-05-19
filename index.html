@@ -13,7 +13,7 @@
     <header class="card__header">
       <img src="logo.png" alt="浴小主" class="card__logo" width="600" height="398">
       <h1>泡浴快递费计算器</h1>
-      <p class="card__subtitle">江苏省发货 · 一盒泡浴按 300g 计算 · 自动推荐更便宜的快递</p>
+      <p class="card__subtitle">江苏省发货 · 每盒 300g · 自动优选箱型并比价极兔/京东</p>
     </header>
 
     <form id="calcForm" class="form" novalidate>
@@ -49,6 +49,8 @@
         <span class="reco__hint" id="recoHint"></span>
       </div>
 
+      <div class="plan" id="plan"></div>
+
       <div class="compare" id="compare"></div>
 
       <ul class="result__breakdown" id="breakdown"></ul>
@@ -59,6 +61,11 @@
         <summary>查看完整价格表（江苏省发货）</summary>
         <div class="price-table" id="priceTable"></div>
         <p class="note">计费公式：起步价 + MAX(计费重量 − 1KG, 0) × 续重价。极兔起步价已含 +2 元/单。</p>
+      </details>
+      <details>
+        <summary>查看箱型成本表</summary>
+        <div class="price-table" id="boxTable"></div>
+        <p class="note">每个箱子按一个独立包裹计算快递费；箱子本身不计入计费重量。推荐方案已综合「箱子成本＋快递成本」取全局最优。</p>
       </details>
     </footer>
   </main>
