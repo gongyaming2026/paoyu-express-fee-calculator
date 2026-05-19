@@ -3,6 +3,9 @@ xiaohongshu_price_compare_with_calculator.xlsx
 *.xlsx
 *.xls
 
+# Logo 原始大图（仓库只保留优化后的 logo.png）
+红logo.png
+
 # OS / 编辑器
 .DS_Store
 Thumbs.db
