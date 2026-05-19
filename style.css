@@ -1,20 +1,20 @@
 /* 快递费计算器 —— 响应式样式（移动端优先，PC 自适应） */
 
 :root {
-  --brand: #2563eb;
-  --brand-dark: #1d4ed8;
-  --bg: #f1f5f9;
+  --brand: #d94e80;          /* 品牌玫粉（按钮/强调） */
+  --brand-dark: #bf3d6b;     /* 悬停加深 */
+  --bg: #fdf4f7;             /* 柔和暖粉背景 */
   --card-bg: #ffffff;
-  --text: #0f172a;
-  --muted: #64748b;
-  --border: #e2e8f0;
-  --ok-bg: #ecfdf5;
-  --ok-text: #047857;
+  --text: #2b1620;           /* 偏暖的深色文字 */
+  --muted: #9b8088;          /* 暖灰 */
+  --border: #f0dde5;         /* 浅粉描边 */
+  --ok-bg: #fdecf3;          /* 推荐结果卡背景 */
+  --ok-text: #bd3a68;        /* 推荐/价格强调色 */
   --warn-bg: #fef3c7;
   --warn-text: #92400e;
   --err: #dc2626;
   --radius: 14px;
-  --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+  --shadow: 0 10px 30px rgba(190, 24, 93, 0.10);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -93,7 +93,7 @@ select, input[type="number"] {
   transition: border-color .15s;
 }
 select {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%2364748b' d='M6 8 0 0h12z'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23d94e80' d='M6 8 0 0h12z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 16px center;
   padding-right: 38px;
@@ -105,12 +105,12 @@ select:focus, input:focus { outline: none; border-color: var(--brand); }
   font-size: 13px;
   padding: 6px 12px;
   border: 1px solid var(--border);
-  background: #f8fafc;
-  color: var(--muted);
+  background: #fdeef4;
+  color: var(--brand-dark);
   border-radius: 999px;
   cursor: pointer;
 }
-.quick-weights button:active { background: #e2e8f0; }
+.quick-weights button:active { background: #f6dbe6; }
 
 .btn {
   width: 100%;
@@ -217,7 +217,7 @@ select:focus, input:focus { outline: none; border-color: var(--brand); }
   list-style: none;
   margin-top: 16px;
   padding-top: 14px;
-  border-top: 1px dashed rgba(4, 120, 87, .35);
+  border-top: 1px dashed rgba(189, 58, 104, .30);
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -231,7 +231,7 @@ select:focus, input:focus { outline: none; border-color: var(--brand); }
 }
 .result__breakdown li span:last-child { text-align: right; }
 .result__breakdown li.bd-sep {
-  border-top: 1px dashed rgba(4, 120, 87, .35);
+  border-top: 1px dashed rgba(189, 58, 104, .30);
   margin: 4px 0;
   padding: 0;
 }
@@ -263,7 +263,7 @@ select:focus, input:focus { outline: none; border-color: var(--brand); }
   border-bottom: 1px solid var(--border);
 }
 .price-table .ptr:last-child { border-bottom: none; }
-.price-table .ptr.head { background: #f8fafc; font-weight: 600; color: var(--muted); }
+.price-table .ptr.head { background: #fdeef4; font-weight: 600; color: var(--brand-dark); }
 .price-table .ptr > div { padding: 9px 10px; }
 .price-table .ptr .zone { font-weight: 600; color: var(--text); }
 .price-table .prov { font-size: 11px; color: var(--muted); font-weight: 400; }
