@@ -1,0 +1,11 @@
+# 内部价格对比表（含议价/分析，不开源）
+xiaohongshu_price_compare_with_calculator.xlsx
+*.xlsx
+*.xls
+
+# OS / 编辑器
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/

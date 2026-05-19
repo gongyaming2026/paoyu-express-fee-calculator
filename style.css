@@ -1,0 +1,241 @@
+/* 快递费计算器 —— 响应式样式（移动端优先，PC 自适应） */
+
+:root {
+  --brand: #2563eb;
+  --brand-dark: #1d4ed8;
+  --bg: #f1f5f9;
+  --card-bg: #ffffff;
+  --text: #0f172a;
+  --muted: #64748b;
+  --border: #e2e8f0;
+  --ok-bg: #ecfdf5;
+  --ok-text: #047857;
+  --warn-bg: #fef3c7;
+  --warn-text: #92400e;
+  --err: #dc2626;
+  --radius: 14px;
+  --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
+  padding: max(16px, env(safe-area-inset-top)) 16px
+           max(16px, env(safe-area-inset-bottom));
+}
+
+.banner {
+  width: 100%;
+  max-width: 480px;
+  background: var(--warn-bg);
+  color: var(--warn-text);
+  font-size: 13px;
+  line-height: 1.5;
+  padding: 10px 14px;
+  border-radius: 10px;
+  margin-bottom: 14px;
+  text-align: center;
+}
+.banner code {
+  background: rgba(0, 0, 0, .08);
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.card {
+  width: 100%;
+  max-width: 480px;
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 28px 22px;
+}
+
+.card__header { text-align: center; margin-bottom: 24px; }
+.card__header h1 { font-size: 24px; font-weight: 700; }
+.card__subtitle { color: var(--muted); font-size: 14px; margin-top: 6px; }
+
+.form { display: flex; flex-direction: column; gap: 20px; }
+
+.field { display: flex; flex-direction: column; gap: 8px; }
+.field label { font-size: 14px; font-weight: 600; color: var(--text); }
+
+select, input[type="number"] {
+  width: 100%;
+  font-size: 16px; /* >=16px 防止 iOS 自动放大 */
+  padding: 13px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--text);
+  appearance: none;
+  -webkit-appearance: none;
+  transition: border-color .15s;
+}
+select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%2364748b' d='M6 8 0 0h12z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 38px;
+}
+select:focus, input:focus { outline: none; border-color: var(--brand); }
+
+.quick-weights { display: flex; flex-wrap: wrap; gap: 8px; }
+.quick-weights button {
+  font-size: 13px;
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  background: #f8fafc;
+  color: var(--muted);
+  border-radius: 999px;
+  cursor: pointer;
+}
+.quick-weights button:active { background: #e2e8f0; }
+
+.btn {
+  width: 100%;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  background: var(--brand);
+  border: none;
+  border-radius: 10px;
+  padding: 14px;
+  cursor: pointer;
+  transition: background .15s;
+}
+.btn:hover { background: var(--brand-dark); }
+.btn:active { transform: translateY(1px); }
+
+.error { color: var(--err); font-size: 13px; text-align: center; }
+
+.result {
+  margin-top: 24px;
+  background: var(--ok-bg);
+  border-radius: 12px;
+  padding: 20px;
+}
+/* 推荐条 */
+.reco {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.reco__tag {
+  background: var(--ok-text);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 999px;
+}
+.reco__name {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--ok-text);
+}
+.reco__hint { font-size: 13px; color: var(--ok-text); }
+
+/* 两家对比 */
+.compare {
+  margin-top: 16px;
+  display: flex;
+  gap: 10px;
+}
+.cmp {
+  flex: 1;
+  background: #fff;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 12px;
+  text-align: center;
+}
+.cmp--best { border-color: var(--ok-text); background: #fff; }
+.cmp__name {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+.cmp__badge {
+  font-size: 11px;
+  color: #fff;
+  background: var(--ok-text);
+  padding: 1px 6px;
+  border-radius: 6px;
+  font-weight: 700;
+}
+.cmp__price { font-size: 24px; font-weight: 800; color: var(--text); }
+.cmp--best .cmp__price { color: var(--ok-text); }
+.cmp__na { font-size: 15px; color: var(--muted); }
+
+.result__breakdown {
+  list-style: none;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px dashed rgba(4, 120, 87, .35);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.result__breakdown li {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--ok-text);
+}
+.note {
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.price-table small { font-weight: 400; font-size: 11px; }
+
+.card__footer { margin-top: 22px; }
+.card__footer summary {
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--muted);
+  user-select: none;
+}
+.price-table {
+  margin-top: 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  font-size: 13px;
+}
+.price-table .ptr {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr;
+  border-bottom: 1px solid var(--border);
+}
+.price-table .ptr:last-child { border-bottom: none; }
+.price-table .ptr.head { background: #f8fafc; font-weight: 600; color: var(--muted); }
+.price-table .ptr > div { padding: 9px 10px; }
+.price-table .ptr .zone { font-weight: 600; color: var(--text); }
+.price-table .prov { font-size: 11px; color: var(--muted); font-weight: 400; }
+
+/* PC 端：更宽的卡片与更大的留白 */
+@media (min-width: 720px) {
+  body { padding: 40px; justify-content: center; }
+  .card { max-width: 540px; padding: 40px 44px; }
+  .banner { max-width: 540px; }
+  .card__header h1 { font-size: 28px; }
+}

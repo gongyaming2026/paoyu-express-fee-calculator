@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#2563eb">
+  <title>泡浴快递费计算器</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="card">
+    <header class="card__header">
+      <h1>泡浴快递费计算器</h1>
+      <p class="card__subtitle">江苏省发货 · 一盒泡浴按 300g 计算 · 自动推荐更便宜的快递</p>
+    </header>
+
+    <form id="calcForm" class="form" novalidate>
+      <div class="field">
+        <label for="boxes">泡浴数量（盒）</label>
+        <input
+          id="boxes"
+          type="number"
+          inputmode="numeric"
+          min="1"
+          step="1"
+          placeholder="例如 5"
+          required
+        >
+        <div class="quick-weights" id="quickBoxes" aria-label="快捷盒数"></div>
+      </div>
+
+      <div class="field">
+        <label for="province">收货省份 / 地区</label>
+        <select id="province" required>
+          <option value="" disabled selected>请选择收货省份</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn">计算并推荐</button>
+      <p id="error" class="error" role="alert" hidden></p>
+    </form>
+
+    <section id="result" class="result" hidden aria-live="polite">
+      <div class="reco" id="reco">
+        <span class="reco__tag">推荐</span>
+        <span class="reco__name" id="recoName">—</span>
+        <span class="reco__hint" id="recoHint"></span>
+      </div>
+
+      <div class="compare" id="compare"></div>
+
+      <ul class="result__breakdown" id="breakdown"></ul>
+    </section>
+
+    <footer class="card__footer">
+      <details>
+        <summary>查看完整价格表（江苏省发货）</summary>
+        <div class="price-table" id="priceTable"></div>
+        <p class="note">计费公式：起步价 + MAX(计费重量 − 1KG, 0) × 续重价。极兔起步价已含 +2 元/单。</p>
+      </details>
+    </footer>
+  </main>
+
+  <script src="prices.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
