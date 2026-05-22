@@ -5,18 +5,23 @@
  *  数据来源：小红书价格比对表（极兔起步价已加 2 元/单，京东按原价）
  *
  *  计费公式（极兔 / 京东 通用）：
- *      费用 = 起步价 + MAX(计费重量 − 1KG, 0) × 续重价
+ *      快递费 = 起步价 + MAX(计费重量 − 1KG, 0) × 续重价
  *
- *      计费重量 = 盒数 × 单盒重量(0.3KG)，不做向上取整。
+ *  两种使用模式（界面顶部切换）：
+ *    1) 产品输入模式：填各产品数量 → 计费重量 = Σ(产品净重) + 所选箱子自重
+ *    2) 实际重量模式：直接填整包重量（已含箱）→ 计费重量 = 该重量
+ *  两模式都「单箱单票」：每单只选一个箱型，箱子另计成本。
+ *      总价 = 快递费(取便宜的一家) + 箱子成本
  *
  *  始发地固定为「江苏省」发货。
- *  如需修改价格：改 destinations 中对应省份的 jt / jd 数值即可。
- *      qi  = 起步价(元)        xu  = 续重价(元/KG)        max = 适用最大重量(KG)
+ *  如需修改：
+ *      products  —— 产品净重(weightKg, 单位 KG)
+ *      boxes     —— 箱子自重(weightKg) 与 成本(cost, 元)
+ *      destinations —— 各省份 jt/jd 的 qi(起步价) / xu(续重价/KG)
  * ===========================================================================*/
 
 window.PRICE_TABLE = {
   origin: "江苏省",
-  boxWeightKg: 0.3,        // 一盒泡浴重量
   firstWeightKg: 1,        // 起步价含首 1KG
   currency: "元",
 
@@ -25,14 +30,24 @@ window.PRICE_TABLE = {
     jd: { key: "jd", name: "京东" },
   },
 
-  // 箱型表（cap=最多装几盒，cost=单个箱子成本/元）。按容量从大到小。
+  // 产品表（weightKg = 单件净重/KG，unit = 输入单位）
+  products: [
+    { key: "paoyu",    name: "五行泡浴",   unit: "盒", weightKg: 0.32  },
+    { key: "qiyuanjiu", name: "百草元气灸", unit: "盒", weightKg: 0.2   },
+    { key: "futieOld", name: "老款敷贴",   unit: "贴", weightKg: 0.05  },
+    { key: "futieNew", name: "新款敷贴",   unit: "贴", weightKg: 0.015 },
+    { key: "bishuyou", name: "鼻舒油",     unit: "瓶", weightKg: 0.05  },
+    { key: "piweishu", name: "脾胃舒精油", unit: "瓶", weightKg: 0.3   },
+  ],
+
+  // 箱型表（cap = 参考最多装几盒泡浴，weightKg = 箱子自重/KG，cost = 单个成本/元）。按容量从大到小。
   boxes: [
-    { name: "零号箱", cap: 36, cost: 5 },
-    { name: "1号箱", cap: 24, cost: 4.5 },
-    { name: "2号箱", cap: 15, cost: 3.5 },
-    { name: "3号箱", cap: 9, cost: 2.5 },
-    { name: "4号箱", cap: 6, cost: 2 },
-    { name: "5号箱", cap: 3, cost: 1.5 },
+    { name: "零号箱", cap: 36, weightKg: 1.2,  cost: 5   },
+    { name: "1号箱", cap: 24, weightKg: 0.8,  cost: 4.5 },
+    { name: "2号箱", cap: 15, weightKg: 0.6,  cost: 3.5 },
+    { name: "3号箱", cap: 9,  weightKg: 0.4,  cost: 2.5 },
+    { name: "4号箱", cap: 6,  weightKg: 0.35, cost: 2   },
+    { name: "5号箱", cap: 3,  weightKg: 0.25, cost: 1.5 },
   ],
 
   // 目的地价格表（始发地：江苏省）

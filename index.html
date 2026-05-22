@@ -6,37 +6,52 @@
   <meta name="theme-color" content="#d94e80">
   <title>泡浴快递费计算器</title>
   <link rel="icon" href="logo.png">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=20260522b">
 </head>
 <body>
   <main class="card">
     <header class="card__header">
       <img src="logo.png" alt="浴小主" class="card__logo" width="600" height="398">
       <h1>泡浴快递费计算器</h1>
-      <p class="card__subtitle">江苏省发货 · 每盒 300g · 自动优选箱型并比价极兔/京东</p>
+      <p class="card__subtitle">江苏省发货 · 3 步算出最划算的快递</p>
     </header>
 
     <form id="calcForm" class="form" novalidate>
-      <div class="field">
-        <label for="boxes">泡浴数量（盒）</label>
-        <input
-          id="boxes"
-          type="number"
-          inputmode="numeric"
-          min="1"
-          step="1"
-          placeholder="例如 5"
-          required
-        >
-        <div class="quick-weights" id="quickBoxes" aria-label="快捷盒数"></div>
+      <div class="modes" role="tablist" aria-label="计算模式">
+        <button type="button" class="mode-tab is-active" data-mode="product" role="tab" aria-selected="true">按产品填数量</button>
+        <button type="button" class="mode-tab" data-mode="weight" role="tab" aria-selected="false">按整包重量</button>
+      </div>
+      <p class="modes-hint" id="modesHint">知道每样发几个 → 选左边；只有称好的总重 → 选右边</p>
+
+      <div class="panel" id="panelProduct">
+        <section class="step">
+          <h2 class="step__title"><span class="step__no">1</span>填要寄的产品数量</h2>
+          <div class="products" id="products"></div>
+        </section>
       </div>
 
-      <div class="field">
-        <label for="province">收货省份 / 地区</label>
+      <div class="panel" id="panelWeight" hidden>
+        <section class="step">
+          <h2 class="step__title"><span class="step__no">1</span>填整包重量</h2>
+          <div class="weight-input">
+            <input id="totalWeight" type="number" inputmode="decimal" min="0" step="0.01" placeholder="例如 2.5">
+            <span class="weight-input__unit">kg</span>
+          </div>
+          <p class="hint">填在秤上称的整包重量（已含箱子）。</p>
+        </section>
+      </div>
+
+      <section class="step">
+        <h2 class="step__title"><span class="step__no">2</span>选一个箱型</h2>
+        <div class="boxes" id="boxChoices" role="radiogroup" aria-label="箱型"></div>
+      </section>
+
+      <section class="step">
+        <h2 class="step__title"><span class="step__no">3</span>选收货省份</h2>
         <select id="province" required>
           <option value="" disabled selected>请选择收货省份</option>
         </select>
-      </div>
+      </section>
 
       <button type="submit" class="btn">计算并推荐</button>
       <p id="error" class="error" role="alert" hidden></p>
@@ -63,14 +78,14 @@
         <p class="note">计费公式：起步价 + MAX(计费重量 − 1KG, 0) × 续重价。极兔起步价已含 +2 元/单。</p>
       </details>
       <details>
-        <summary>查看箱型成本表</summary>
+        <summary>查看箱型重量 / 成本表</summary>
         <div class="price-table" id="boxTable"></div>
-        <p class="note">一票一箱：每个箱子为一个独立包裹，各自单独计快递费（各付一次起步价）。单盒 0.3kg 已含箱子均摊重量，故箱子不再额外计重。推荐方案已综合「箱子成本＋快递成本」取全局最优。</p>
+        <p class="note">单箱单票：每单只用一个箱子、按一个包裹计费。产品输入模式的计费重量＝产品净重＋箱子自重；实际重量模式直接用你填的整包重量（已含箱）。总价＝快递费＋箱子成本。</p>
       </details>
     </footer>
   </main>
 
-  <script src="prices.js"></script>
-  <script src="app.js"></script>
+  <script src="prices.js?v=20260522b"></script>
+  <script src="app.js?v=20260522b"></script>
 </body>
 </html>

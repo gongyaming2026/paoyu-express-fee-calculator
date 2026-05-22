@@ -100,17 +100,121 @@ select {
 }
 select:focus, input:focus { outline: none; border-color: var(--brand); }
 
-.quick-weights { display: flex; flex-wrap: wrap; gap: 8px; }
-.quick-weights button {
-  font-size: 13px;
-  padding: 6px 12px;
-  border: 1px solid var(--border);
+/* 模式切换 tab */
+.modes {
+  display: flex;
+  gap: 6px;
   background: #fdeef4;
-  color: var(--brand-dark);
-  border-radius: 999px;
-  cursor: pointer;
+  padding: 5px;
+  border-radius: 12px;
 }
-.quick-weights button:active { background: #f6dbe6; }
+.mode-tab {
+  flex: 1;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 11px 8px;
+  border: none;
+  border-radius: 9px;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition: background .15s, color .15s, box-shadow .15s;
+}
+.mode-tab.is-active {
+  background: #fff;
+  color: var(--brand-dark);
+  box-shadow: 0 2px 6px rgba(190, 24, 93, .12);
+}
+.modes-hint {
+  margin-top: -8px;
+  font-size: 12px;
+  color: var(--muted);
+  text-align: center;
+  line-height: 1.5;
+}
+
+.panel { display: flex; flex-direction: column; }
+.panel[hidden] { display: none; }
+.hint { font-size: 12px; color: var(--muted); line-height: 1.5; margin-top: 2px; }
+
+/* 分步小节 */
+.step { display: flex; flex-direction: column; gap: 10px; }
+.step__title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+}
+.step__no {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--brand);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  flex: none;
+}
+
+/* 整包重量输入 */
+.weight-input { position: relative; }
+.weight-input input { padding-right: 44px; }
+.weight-input__unit {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  color: var(--muted);
+  pointer-events: none;
+}
+
+/* 产品数量行 */
+.products { display: flex; flex-direction: column; gap: 8px; }
+.prod-row {
+  display: grid;
+  grid-template-columns: 1fr 72px auto;
+  align-items: center;
+  gap: 10px;
+}
+.prod-row__label { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.prod-row__name { font-size: 15px; font-weight: 600; }
+.prod-row__w { font-size: 11px; color: var(--muted); }
+.prod-row__qty { text-align: center; padding: 10px 6px; }
+.prod-row__unit { font-size: 13px; color: var(--muted); white-space: nowrap; }
+
+/* 箱型单选（3 列紧凑卡片） */
+.boxes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.box-chip { position: relative; cursor: pointer; }
+.box-chip input { position: absolute; opacity: 0; pointer-events: none; }
+.box-chip__body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 10px 6px;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  background: #fff;
+  text-align: center;
+  transition: border-color .15s, background .15s, box-shadow .15s;
+}
+.box-chip__name { font-size: 14px; font-weight: 700; color: var(--text); }
+.box-chip__meta { font-size: 11px; color: var(--muted); }
+.box-chip input:checked + .box-chip__body {
+  border-color: var(--brand);
+  background: #fdeef4;
+  box-shadow: 0 2px 6px rgba(190, 24, 93, .12);
+}
+.box-chip input:focus-visible + .box-chip__body {
+  outline: 2px solid var(--brand);
+  outline-offset: 1px;
+}
 
 .btn {
   width: 100%;
